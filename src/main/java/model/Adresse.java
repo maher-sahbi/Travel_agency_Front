@@ -1,10 +1,8 @@
-/**
- * 
- */
+
 package model;
 
 /**
- * @author ajc
+ * @author 
  */
 public class Adresse
 {

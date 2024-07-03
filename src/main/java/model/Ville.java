@@ -3,14 +3,10 @@ package model;
 public class Ville
 {
 
-    /**
-     * Id de la ville
-     */
+    
     private int idVil;
 
-    /**
-     * Nom de la ville
-     */
+   
     private String nom;
 
     public Ville(int idVil, String nom)

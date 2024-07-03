@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package model;
 
 /**
@@ -9,9 +7,7 @@ package model;
 public class Login
 {
 
-    /**
-     * 
-     */
+    
     private int idLog;
     private String Login;
     private String motDePasse;

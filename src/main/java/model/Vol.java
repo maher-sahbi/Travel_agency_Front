@@ -11,31 +11,19 @@ import java.util.List;
 public class Vol
 {
 
-    /**
-     * id du vol
-     */
+  
     private int idVol;
-    /**
-     * date de départ du vol
-     */
+   
     private Date dateDepart;
-    /**
-     * date d'arrivé du vol
-     */
+    
     private Date dateArrivee;
-    /**
-     * heure départ du vol
-     */
+    
     private Time heureDepart;
-    /**
-     * heure d'arrivée du vol
-     */
+   
     private Time heureArrivee;
     private Aeroport aeroportDepart;
     private Aeroport aeroportArrivee;
-    /**
-     * liste d'escales par lesquelles on peut passer
-     */
+    
     private List<Escale> escales;
 
     /**

@@ -5,38 +5,22 @@ import java.util.Date;
 public class Reservation
 {
 
-    /**
-     * Id de la réservation
-     */
+   
     private int idRes;
-    /**
-     * Date de la réservation
-     */
+   
     private Date date;
-    /**
-     * Numéro de la réservation
-     */
+   
     private int numero;
-    /**
-     * Etat de la réservation (ouvert ou fermé)
-     */
+   
     private EtatReservation etat;
-    /**
-     * id du vol
-     */
+    
     private int idVol;
-    /**
-     * id du passager
-     */
+   
     private int idPas;
-    /**
-     * id du client
-     */
+   
     private int idCli;
 
-    /**
-     * Vol associé à la réservation
-     */
+    
     private Vol vol;
     private Passager passager;
     private Client client;

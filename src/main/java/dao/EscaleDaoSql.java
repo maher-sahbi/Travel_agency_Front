@@ -21,10 +21,10 @@ public class EscaleDaoSql implements EscaleDao
         }
         catch (ClassNotFoundException e)
         {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
-        // 2. Créer la connexion à la base (on instancie l'objet connexion)
+       
         try
         {
             connexion = DriverManager.getConnection(
@@ -32,7 +32,7 @@ public class EscaleDaoSql implements EscaleDao
         }
         catch (SQLException e)
         {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
     }
@@ -53,38 +53,34 @@ public class EscaleDaoSql implements EscaleDao
 
     public List<Escale> findAll()
     {
-        // Liste des escales que l'on va retourner
+        
         List<Escale> escales = new ArrayList<Escale>();
         AeroportDaoSQL aeroportDAO = new AeroportDaoSQL();
         VolDaoSql volDAO = new VolDaoSql();
         try
         {
-            // connexion
+           
             PreparedStatement ps = connexion
                     .prepareStatement("SELECT * FROM escale");
-            // 4. Execution de la requête
+         
             ResultSet tuple = ps.executeQuery();
-            // 5. Parcoutuple de l'ensemble des résultats (ResultSet) pour
-            // récupérer les valeutuple des colonnes du tuple qui correspondent
-            // aux
-            // valeur des attributs de l'objet
+           
             while (tuple.next())
             {
-                // Creation d'un objet escale
+                
                 Escale escale = new Escale(tuple.getInt("idEscale"));
                 escale.setDateArrivee(tuple.getDate("dateArrivee"));
                 escale.setDateDepart(tuple.getDate("dateDepart"));
                 escale.setHeureArrivee(tuple.getTime("heureArrivee"));
                 escale.setHeureDepart(tuple.getTime("heureDepart"));
-                // ajout des id Adress
+                
                 escale.setVol(volDAO.findById(tuple.getInt("idVol")));
-                // ajout des aeroports
+               
                 escale.setAeoroport(
                         aeroportDAO.findById(tuple.getInt("idAeroport")));
-                // Ajout du nouvel objet Aeroport créé à la liste des aéroports
+                
                 escales.add(escale);
-            } // fin de la boucle de parcoutuple de l'ensemble des résultats
-              // ajout des vols;
+            }
 
             volDAO.fermetureConnexion();
             aeroportDAO.fermetureConnexion();
@@ -94,7 +90,7 @@ public class EscaleDaoSql implements EscaleDao
         {
             e.printStackTrace();
         }
-        // Retourne la liste de tous les aéroports
+       
         return escales;
     }
 
@@ -109,10 +105,10 @@ public class EscaleDaoSql implements EscaleDao
 
             PreparedStatement ps = connexion
                     .prepareStatement("SELECT * FROM escale where idEscale=?");
-            // Cherche l'idVol voulu dans la BDD
+           
             ps.setInt(1, idEscale);
 
-            // Récupération des résultats de la requête
+            
             ResultSet tuple = ps.executeQuery();
 
             if (tuple.next())

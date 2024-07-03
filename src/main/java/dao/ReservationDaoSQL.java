@@ -18,20 +18,16 @@ public class ReservationDaoSQL implements ReservationDao
 
     public ReservationDaoSQL()
     {
-        /*
-         * Connexion à la BDD
-         */
-        // 1. Chargement du driver
-        try
+       
         {
             Class.forName("com.mysql.jdbc.Driver");
         }
         catch (ClassNotFoundException e)
         {
-            // TODO Auto-generated catch block
+          
             e.printStackTrace();
         }
-        // 2. Créer la connexion à la base (on instancie l'objet connexion)
+       
         try
         {
             connexion = DriverManager.getConnection(
@@ -39,7 +35,7 @@ public class ReservationDaoSQL implements ReservationDao
         }
         catch (SQLException e)
         {
-            // TODO Auto-generated catch block
+           
             e.printStackTrace();
         }
     }
@@ -58,7 +54,7 @@ public class ReservationDaoSQL implements ReservationDao
 
     public List<Reservation> findAll()
     {
-        // Liste des réservations que l'on va retourner
+       
         List<Reservation> reservations = new ArrayList<Reservation>();
         PassagerDaoSQL passagerDAO = new PassagerDaoSQL();
         ClientDaoSql clientDAO = new ClientDaoSql();
@@ -67,18 +63,15 @@ public class ReservationDaoSQL implements ReservationDao
         {
             PreparedStatement ps = connexion
                     .prepareStatement("SELECT * FROM Reservation");
-            // 4. Execution de la requête
+           
             ResultSet tuple = ps.executeQuery();
-            // 5. Parcoutuple de l'ensemble des résultats (ResultSet) pour
-            // récupérer les valeutuple des colonnes du tuple qui correspondent
-            // aux
-            // valeur des attributs de l'objet
+            
             while (tuple.next())
             {
-                // Creation d'un objet compagnieAerienne
+                
                 Reservation reservation = new Reservation(
                         tuple.getInt("idResa"));
-                // MAJ des autres attributs de Eleve
+               
                 reservation.setDate(tuple.getDate("dateReservation"));
                 reservation.setNumero(tuple.getInt("numero"));
                 reservation.setEtat(
@@ -88,11 +81,9 @@ public class ReservationDaoSQL implements ReservationDao
                         passagerDAO.findById(tuple.getInt("idPassager")));
                 reservation.setClient(
                         clientDAO.findById(tuple.getInt("idClient")));
-                // Ajout du nouvel objet réservation créé à la liste des
-                // réservations
+                
                 reservations.add(reservation);
-            } // fin de la boucle de parcours de l'ensemble des résultats
-              // insertion de l'objet vol dans réservation
+            } 
 
             volDAO.fermetureConnexion();
             clientDAO.fermetureConnexion();
@@ -103,13 +94,13 @@ public class ReservationDaoSQL implements ReservationDao
         {
             e.printStackTrace();
         }
-        // Retourne la liste de toutes les réservations
+      
         return reservations;
     }
 
     public Reservation findById(Integer idRes)
     {
-        // Déclaration d'un objet reservation
+        
         Reservation reservation = null;
         PassagerDaoSQL passagerDAO = new PassagerDaoSQL();
         ClientDaoSql clientDAO = new ClientDaoSql();
@@ -119,10 +110,10 @@ public class ReservationDaoSQL implements ReservationDao
         {
             PreparedStatement ps = connexion.prepareStatement(
                     "SELECT * FROM reservation where idResa=?");
-            // Cherche l'idResa recherché dans la BDD
+            
             ps.setInt(1, idRes);
 
-            // Récupération des résultats de la requête
+            
             ResultSet tuple = ps.executeQuery();
 
             if (tuple.next())

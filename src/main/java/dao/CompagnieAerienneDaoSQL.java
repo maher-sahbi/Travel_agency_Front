@@ -21,10 +21,10 @@ public class CompagnieAerienneDaoSQL implements CompagnieAerienneDao
         }
         catch (ClassNotFoundException e)
         {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
-        // 2. Créer la connexion à la base (on instancie l'objet connexion)
+        
         try
         {
             connexion = DriverManager.getConnection(
@@ -32,7 +32,7 @@ public class CompagnieAerienneDaoSQL implements CompagnieAerienneDao
         }
         catch (SQLException e)
         {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
     }
@@ -53,54 +53,48 @@ public class CompagnieAerienneDaoSQL implements CompagnieAerienneDao
 
     public List<CompagnieAerienne> findAll()
     {
-        // Liste des compagnies aeriennes que l'on va retourner
+        
         List<CompagnieAerienne> compagniesAeriennes = new ArrayList<CompagnieAerienne>();
-        // Connexion à la BDD
+       
         try
         {
-            /*
-             * Connexion à la BDD
-             */
+            
             PreparedStatement ps = connexion
                     .prepareStatement("SELECT * FROM compagnie_aerienne");
-            // 4. Execution de la requête
+            
             ResultSet tuple = ps.executeQuery();
-            // 5. Parcoutuple de l'ensemble des résultats (ResultSet) pour
-            // récupérer les valeutuple des colonnes du tuple qui correspondent
-            // aux
-            // valeur des attributs de l'objet
+            
             while (tuple.next())
             {
-                // Creation d'un objet compagnieAerienne
+              
                 CompagnieAerienne compagnieAerienne = new CompagnieAerienne(
                         tuple.getInt("id"), tuple.getString("nom"));
-                // Ajout du nouvel objet compagnieAerienne créé à la liste des
-                // compagniesAeriennes
+                
                 compagniesAeriennes.add(compagnieAerienne);
-            } // fin de la boucle de parcoutuple de l'ensemble des résultats
+            } 
 
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
-        // Retourne la liste de tous les aéroports
+        
         return compagniesAeriennes;
     }
 
     public CompagnieAerienne findById(Integer id)
     {
-        // Déclaration d'un objet compagnieAerienne
+        
         CompagnieAerienne compagnieAerienne = null;
 
         try
         {
             PreparedStatement ps = connexion.prepareStatement(
                     "SELECT * FROM compagnie_aerienne where id=?");
-            // Cherche l'idComp recherché dans la BDD
+           
             ps.setInt(1, id);
 
-            // Récupération des résultats de la requête
+           
             ResultSet tuple = ps.executeQuery();
 
             if (tuple.next())

@@ -20,10 +20,10 @@ public class CompagnieAerienneVolDaoSQL implements CompagnieAerienneVolDao
         }
         catch (ClassNotFoundException e)
         {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
-        // 2. Créer la connexion à la base (on instancie l'objet connexion)
+      
         try
         {
             connexion = DriverManager.getConnection(
@@ -31,7 +31,7 @@ public class CompagnieAerienneVolDaoSQL implements CompagnieAerienneVolDao
         }
         catch (SQLException e)
         {
-            // TODO Auto-generated catch block
+         
             e.printStackTrace();
         }
     }
@@ -52,26 +52,22 @@ public class CompagnieAerienneVolDaoSQL implements CompagnieAerienneVolDao
 
     public List<CompagnieAerienneVol> findAll()
     {
-        // Liste des CompagnieAerienneVol que l'on va retourner
+       
         List<CompagnieAerienneVol> compagnieaeriennevols = new ArrayList<CompagnieAerienneVol>();
         VolDaoSql volDAO = new VolDaoSql();
         CompagnieAerienneDaoSQL compagnieDAO = new CompagnieAerienneDaoSQL();
-        // Connexion à la BDD
+       
         try
         {
-            /*
-             * Connexion à la BDD
-             */
+            
             PreparedStatement ps = connexion
                     .prepareStatement("SELECT * FROM compagnie_aerienne_vol");
-            // 4. Execution de la requête
+            
             ResultSet tuple = ps.executeQuery();
-            // 5. Parcours de l'ensemble des résultats (ResultSet) pour
-            // récupérer les valeurs des colonnes du tuple qui correspondent aux
-            // valeur des attributs de l'objet
+           
             while (tuple.next())
             {
-                // Creation d'un objet Aeroport
+               
                 CompagnieAerienneVol compagnieaeriennevol = new CompagnieAerienneVol(
                         tuple.getString("numero"), tuple.getShort("ouvert"));
                 compagnieaeriennevol.setId(tuple.getInt("id"));
@@ -79,9 +75,9 @@ public class CompagnieAerienneVolDaoSQL implements CompagnieAerienneVolDao
                         compagnieDAO.findById(tuple.getInt("idCompagnie")));
                 compagnieaeriennevol
                         .setVol(volDAO.findById(tuple.getInt("idVol")));
-                // Ajout du nouvel objet Aeroport créé à la liste des élèves
+                
                 compagnieaeriennevols.add(compagnieaeriennevol);
-            } // fin de la boucle de parcours de l'ensemble des résultats
+            } 
 
             volDAO.fermetureConnexion();
             compagnieDAO.fermetureConnexion();
@@ -91,7 +87,7 @@ public class CompagnieAerienneVolDaoSQL implements CompagnieAerienneVolDao
         {
             e.printStackTrace();
         }
-        // Retourne la liste de tous les aéroports
+       
         return compagnieaeriennevols;
     }
 
@@ -105,10 +101,10 @@ public class CompagnieAerienneVolDaoSQL implements CompagnieAerienneVolDao
 
             PreparedStatement ps = connexion.prepareStatement(
                     "SELECT * FROM compagnie_aerienne_vol where id=?");
-            // Cherche l'idComp recherché dans la BDD
+            
             ps.setInt(1, id);
 
-            // Récupération des résultats de la requête
+           
             ResultSet tuple = ps.executeQuery();
 
             if (tuple.next())
@@ -141,7 +137,7 @@ public class CompagnieAerienneVolDaoSQL implements CompagnieAerienneVolDao
             PreparedStatement requete;
             requete = connexion.prepareStatement(
                     "INSERT INTO compagnie_aerienne_vol (id, numero, idCompagnie, idVol, ouvert) VALUES(?,?,?,?,?)");
-            // set sur le paramètre 1
+            
             requete.setInt(1, compagnieAerienneVol.getId());
             requete.setString(2, compagnieAerienneVol.getNumero());
             requete.setLong(3,
@@ -149,8 +145,7 @@ public class CompagnieAerienneVolDaoSQL implements CompagnieAerienneVolDao
             requete.setInt(4, compagnieAerienneVol.getVol().getIdVol());
             requete.setShort(5, compagnieAerienneVol.getOuvert());
 
-            // executeUpdate, different de executequery que l'on a dans FindAll
-            // et FindById
+          
             requete.executeUpdate();
 
         }

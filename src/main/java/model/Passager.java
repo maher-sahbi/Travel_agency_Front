@@ -3,17 +3,11 @@ package model;
 public class Passager
 {
 
-    /**
-     * Id du passager
-     */
+   
     private int idPas;
-    /**
-     * Nom du passager
-     */
+   
     private String nom;
-    /**
-     * Prenom du passager
-     */
+   
     private String prenom;
 
     private Adresse adresse;

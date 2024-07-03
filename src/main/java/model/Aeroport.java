@@ -6,18 +6,12 @@ import java.util.List;
 public class Aeroport
 {
 
-    /**
-     * id de l'aéroport
-     */
+   
     private int idAer;
-    /**
-     * Nom de l'aéroport
-     */
+    
     private String nom;
 
-    /**
-     * Liste des villes désservies par l'aéroport
-     */
+   
     private List<Ville> villes = new ArrayList<Ville>();
 
     public Aeroport(int idAer, String nom)
@@ -35,7 +29,7 @@ public class Aeroport
      */
     public void ajouterVille(Ville ville)
     {
-        this.villes.add(ville); // ajout d'une ville déjà existante
+        this.villes.add(ville); 
     }
 
     public int getIdAer()
